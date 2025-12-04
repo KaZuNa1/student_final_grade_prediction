@@ -166,6 +166,7 @@
 \newfontfamily\mongoliafont[Script=Cyrillic]{Times New Roman}
 \newfontfamily\cyrillicfonttt{Courier New}
 \newfontfamily\cyrillicfontsf{Arial}
+\renewcommand{\contentsname}{Агуулга}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -215,25 +216,19 @@
   pdfauthor={Багийн гишүүдийн нэрс},
   pdflang={mn},
   colorlinks=true,
-  linkcolor={blue},
+  linkcolor={black},
   filecolor={Maroon},
   citecolor={Blue},
-  urlcolor={Blue},
+  urlcolor={black},
   pdfcreator={LaTeX via pandoc}}
 
 
 \title{Оюутны эцсийн дүнг урьдчилан таамаглах}
 \author{Багийн гишүүдийн нэрс}
-\date{Invalid Date}
+\date{2025 оны 12-р сарын 4}
 \begin{document}
 \maketitle
 
-\renewcommand*\contentsname{Агуулга}
-{
-\hypersetup{linkcolor=}
-\setcounter{tocdepth}{3}
-\tableofcontents
-}
 
 Энэхүү төслийн ажлын зорилго нь Португалийн дунд сургуулийн математикийн
 хичээлийн оюутнуудын эцсийн дүн (G3)-ийг урьдчилан таамаглахад шугаман
@@ -242,6 +237,9 @@
 загварын үр дүнг үнэлсэн. Үр дүнгээр оюутнуудын хоёр дахь үеийн дүн (G2)
 нь эцсийн дүнг урьдчилан таамаглахад хамгийн чухал хүчин зүйл бөгөөд
 загварын R² үзүүлэлт 0.75 байв.
+
+\tableofcontents
+\newpage
 
 \section{Оршил}\label{ux43eux440ux448ux438ux43b}
 

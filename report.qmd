@@ -1,7 +1,8 @@
 ---
 title: "Оюутны эцсийн дүнг урьдчилан таамаглах"
 author: "Багийн гишүүдийн нэрс"
-date: "2025 оны 12-р сарын 4"
+date: 2025-12-04
+date-format: "YYYY оны M-р сарын D"
 lang: mn
 format:
   pdf:
@@ -22,8 +23,11 @@ format:
         \newfontfamily\mongoliafont[Script=Cyrillic]{Times New Roman}
         \newfontfamily\cyrillicfonttt{Courier New}
         \newfontfamily\cyrillicfontsf{Arial}
-    toc: true
-    toc-title: "Агуулга"
+        \renewcommand{\contentsname}{Агуулга}
+    colorlinks: true
+    linkcolor: black
+    urlcolor: black
+    toc: false
     number-sections: true
     keep-tex: true
 bibliography: references.bib
@@ -31,6 +35,9 @@ csl: ieee.csl
 ---
 
 Энэхүү төслийн ажлын зорилго нь Португалийн дунд сургуулийн математикийн хичээлийн оюутнуудын эцсийн дүн (G3)-ийг урьдчилан таамаглахад шугаман регрессийн загварыг ашиглан статистикийн арга зүйг практикт хэрэглэх юм. Өгөгдлийн олонлогт 395 оюутны 33 шинж чанарын мэдээлэл багтсан бөгөөд загварын үр дүнг үнэлсэн. Үр дүнгээр оюутнуудын хоёр дахь үеийн дүн (G2) нь эцсийн дүнг урьдчилан таамаглахад хамгийн чухал хүчин зүйл бөгөөд загварын R² үзүүлэлт 0.75 байв.
+
+\tableofcontents
+\newpage
 
 # Оршил
 
