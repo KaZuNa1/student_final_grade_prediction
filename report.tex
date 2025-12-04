@@ -591,22 +591,71 @@ dtype: int64
 \begin{itemize}
 \tightlist
 \item
-  {[}y тайлбар{]}
+  \(y\) - зорилтот хувьсагч (эцсийн дүн G3)
 \item
-  {[}β₀ тайлбар{]}
+  \(\beta_0\) - тогтмол үзүүлэлт (intercept), бусад хувьсагчид 0 байхад
+  \(y\)-ийн утга
 \item
-  {[}βᵢ тайлбар{]}
+  \(\beta_i\) - \(i\)-р хувьсагчийн коэффициент, тухайн хувьсагчийн нэгж
+  өөрчлөлт \(y\)-д үзүүлэх нөлөө
 \item
-  {[}xᵢ тайлбар{]}
+  \(x_i\) - тайлбарлагч хувьсагчид (нас, хүйс, өмнөх дүн гэх мэт)
 \item
-  {[}ε тайлбар{]}
+  \(\varepsilon\) - алдааны гишүүн (загварын тайлбарлаж чадахгүй
+  санамсаргүй алдаа)
+\item
+  \(n\) - тайлбарлагч хувьсагчдын тоо
 \end{itemize}
+
+Энэхүү судалгаанд \(y\) нь оюутны эцсийн дүн (G3) бөгөөд
+\(x_1, x_2, ..., x_n\) нь 32 тайлбарлагч хувьсагчид (демографик
+мэдээлэл, боловсролын үзүүлэлтүүд, өмнөх улирлын дүн гэх мэт) болно.
+
+Загварыг сургахдаа наименьших квадратов (Ordinary Least Squares - OLS)
+аргыг ашиглана. Энэ арга нь бодит утга ба таамагласан утгын зөрүүний
+квадратуудын нийлбэрийг багасгах замаар оновчтой коэффициентүүдийг
+тооцоолдог:
+
+\[\min \sum_{i=1}^{m} (y_i - \hat{y}_i)^2\]
+
+Энд \(y_i\) бодит утга, \(\hat{y}_i\) загварын таамаглал, \(m\) нь
+оюутнуудын тоо юм.
 
 \subsection{Загварын давуу
 тал}\label{ux437ux430ux433ux432ux430ux440ux44bux43d-ux434ux430ux432ux443ux443-ux442ux430ux43b}
 
-{[}Коэффициент ойлгогдох, хэрэгжүүлэхэд хялбар, хурдан, статистик
-үндэслэлтэй гэх мэт{]}
+Шугаман регрессийн загвар нь дараах давуу талуудтай:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Тайлбарлахад хялбар} - Коэффициент бүр нь тухайн хувьсагчийн
+  нөлөөллийг шууд харуулна. Жишээлбэл, хэрэв хоёрдугаар улирлын дүн
+  (G2)-ийн коэффициент 0.95 бол G2 1 оноогоор нэмэгдэх тутам эцсийн дүн
+  (G3) дунджаар 0.95 оноогоор нэмэгдэнэ гэсэн үг.
+\item
+  \textbf{Хурдан бөгөөд үр дүнтэй} - Тооцооллын нарийн төвөгтэй байдал
+  бага тул том хэмжээний өгөгдөлд хурдан ажиллана. Мөн багцын дүрэм
+  (batch processing) ашиглан хэдэн мянган мөрийн өгөгдлийг хэдхэн
+  секундад боловсруулж чадна.
+\item
+  \textbf{Статистик үнэлгээ өгөх} - p-value, R², F-statistic зэрэг
+  статистик үзүүлэлтүүдээр загварын найдвартай байдал, хувьсагч бүрийн
+  ач холбогдлыг нарийвчлан үнэлж болно.
+\item
+  \textbf{Суурь загвар болох} - Илүү нарийн төвөгтэй загваруудтай
+  (Random Forest, Neural Network) харьцуулахад суурь цэг болдог. Хэрэв
+  энгийн загвар хангалттай үр дүн өгвөл илүү төвөгтэй загвар
+  шаардлагагүй байж болно.
+\item
+  \textbf{Овerfitting-ийн эрсдэл бага} - Хувьсагчдын тоо их байсан ч
+  regularization (Ridge, Lasso) аргуудыг хэрэглэж овerfitting-ээс
+  сэргийлж болно.
+\end{enumerate}
+
+Эдгээр давуу талуудын ачаар шугаман регресс нь боловсролын өгөгдлийн
+шинжилгээнд өргөн хэрэглэгддэг бөгөөд манай судалгаанд тохиромжтой
+сонголт болсон.
 
 \section{Өгөгдөлтэй танилцах
 шинжилгээ}\label{ux4e9ux433ux4e9ux433ux434ux4e9ux43bux442ux44dux439-ux442ux430ux43dux438ux43bux446ux430ux445-ux448ux438ux43dux436ux438ux43bux433ux44dux44d}
@@ -614,57 +663,261 @@ dtype: int64
 \subsection{Зорилтот хувьсагчийн шинжилгээ
 (G3)}\label{ux437ux43eux440ux438ux43bux442ux43eux442-ux445ux443ux432ux44cux441ux430ux433ux447ux438ux439ux43d-ux448ux438ux43dux436ux438ux43bux433ux44dux44d-g3}
 
+Эхлээд зорилтот хувьсагч болох эцсийн дүн (G3)-ийн тархалтыг авч үзье.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# G3 статистик (дундаж, медиан, std, min, max)}
-\CommentTok{\# Histogram + boxplot зурах}
+\CommentTok{\# G3{-}ийн статистик үзүүлэлтүүд}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"G3 (Эцсийн дүн) статистик:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Дундаж: }\SpecialCharTok{\{}\NormalTok{df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\NormalTok{mean()}\SpecialCharTok{:.2f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Медиан: }\SpecialCharTok{\{}\NormalTok{df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\NormalTok{median()}\SpecialCharTok{:.2f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Стандарт хазайлт: }\SpecialCharTok{\{}\NormalTok{df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\NormalTok{std()}\SpecialCharTok{:.2f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Хамгийн бага: }\SpecialCharTok{\{}\NormalTok{df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\BuiltInTok{min}\NormalTok{()}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Хамгийн их: }\SpecialCharTok{\{}\NormalTok{df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\BuiltInTok{max}\NormalTok{()}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# Histogram ба boxplot зурах}
+\NormalTok{fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+
+\CommentTok{\# Histogram}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].hist(df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{], bins}\OperatorTok{=}\DecValTok{20}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}skyblue\textquotesingle{}}\NormalTok{, edgecolor}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].set\_xlabel(}\StringTok{\textquotesingle{}Эцсийн дүн (G3)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Давтамж\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}G3{-}ийн тархалт\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].axvline(df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{].mean(), color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\SpecialStringTok{f"Дундаж: }\SpecialCharTok{\{}\NormalTok{df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\NormalTok{mean()}\SpecialCharTok{:.2f\}}\SpecialStringTok{"}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].legend()}
+
+\CommentTok{\# Boxplot}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].boxplot(df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{])}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Эцсийн дүн (G3)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}G3{-}ийн boxplot\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
-{[}G3 тархалтын тайлбар{]}
+\begin{verbatim}
+G3 (Эцсийн дүн) статистик:
+Дундаж: 10.42
+Медиан: 11.00
+Стандарт хазайлт: 4.58
+Хамгийн бага: 0
+Хамгийн их: 20
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-6-output-2.pdf}}
+
+Эцсийн дүн (G3) нь дунджаар 10.42 оноо байгаа бөгөөд 0-аас 20 хүртэл
+хэлбэлздэг. Тархалт нь бага зэрэг зүүн тийш хазайсан (0 оноо авсан
+оюутнууд байна) боловч ихэнх оюутнууд 8-14 онооны хооронд байрлана.
+Boxplot дээрх outlier цэгүүд нь маш өндөр буюу маш доогуур дүнтэй цөөн
+тооны оюутнуудыг илтгэнэ.
 
 \subsection{Корреляцийн
 шинжилгээ}\label{ux43aux43eux440ux440ux435ux43bux44fux446ux438ux439ux43d-ux448ux438ux43dux436ux438ux43bux433ux44dux44d}
 
+Өмнөх улирлуудын дүн (G1, G2) болон эцсийн дүн (G3)-ийн хоорондын
+хамаарлыг судална.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# G1, G2, G3 корреляцийн матриц}
-\CommentTok{\# Heatmap зурах}
+\CommentTok{\# G1, G2, G3{-}ийн корреляцийн матриц}
+\NormalTok{grades\_corr }\OperatorTok{=}\NormalTok{ df[[}\StringTok{\textquotesingle{}G1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]].corr()}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Дүнгийн корреляцийн матриц:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(grades\_corr)}
+
+\CommentTok{\# Correlation heatmap}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\NormalTok{sns.heatmap(grades\_corr, annot}\OperatorTok{=}\VariableTok{True}\NormalTok{, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}coolwarm\textquotesingle{}}\NormalTok{, center}\OperatorTok{=}\DecValTok{0}\NormalTok{, }
+\NormalTok{            square}\OperatorTok{=}\VariableTok{True}\NormalTok{, linewidths}\OperatorTok{=}\DecValTok{1}\NormalTok{, cbar\_kws}\OperatorTok{=}\NormalTok{\{}\StringTok{"shrink"}\NormalTok{: }\FloatTok{0.8}\NormalTok{\})}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}G1, G2, G3{-}ийн корреляци\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
-{[}G2-G3 корреляци өндөр тухай{]}
+\begin{verbatim}
+Дүнгийн корреляцийн матриц:
+          G1        G2        G3
+G1  1.000000  0.852118  0.801468
+G2  0.852118  1.000000  0.904868
+G3  0.801468  0.904868  1.000000
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-7-output-2.pdf}}
+
+G2 (хоёрдугаар улирлын дүн) болон G3 (эцсийн дүн)-ийн хооронд маш өндөр
+корреляци (0.90 орчим) ажиглагдаж байна. Энэ нь G2 нь эцсийн дүнг
+таамаглахад хамгийн чухал хувьсагч болохыг харуулж байна. G1 ба G3-ийн
+корреляци мөн өндөр (0.80 орчим) боловч G2-оос бага.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# G1 vs G3, G2 vs G3 scatter plots}
+\NormalTok{fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+
+\CommentTok{\# G1 vs G3}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].scatter(df[}\StringTok{\textquotesingle{}G1\textquotesingle{}}\NormalTok{], df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{], alpha}\OperatorTok{=}\FloatTok{0.5}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].set\_xlabel(}\StringTok{\textquotesingle{}Эхний улирлын дүн (G1)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Эцсийн дүн (G3)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].set\_title(}\SpecialStringTok{f\textquotesingle{}G1 ба G3 (корреляци: }\SpecialCharTok{\{}\NormalTok{df[}\StringTok{"G1"}\NormalTok{]}\SpecialCharTok{.}\NormalTok{corr(df[}\StringTok{"G3"}\NormalTok{])}\SpecialCharTok{:.2f\}}\SpecialStringTok{)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\CommentTok{\# G2 vs G3}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].scatter(df[}\StringTok{\textquotesingle{}G2\textquotesingle{}}\NormalTok{], df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{], alpha}\OperatorTok{=}\FloatTok{0.5}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].set\_xlabel(}\StringTok{\textquotesingle{}Хоёрдугаар улирлын дүн (G2)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Эцсийн дүн (G3)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].set\_title(}\SpecialStringTok{f\textquotesingle{}G2 ба G3 (корреляци: }\SpecialCharTok{\{}\NormalTok{df[}\StringTok{"G2"}\NormalTok{]}\SpecialCharTok{.}\NormalTok{corr(df[}\StringTok{"G3"}\NormalTok{])}\SpecialCharTok{:.2f\}}\SpecialStringTok{)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
-{[}Шугаман хамаарал харагдаж байна{]}
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-8-output-1.pdf}}
+
+Scatter plot дээрээс тодорхой шугаман хамаарал харагдаж байна. Ялангуяа
+G2 ба G3-ийн хооронд цэгүүд илүү нягт шугам дагуу байрлаж байгаа нь
+тэдгээрийн хоорондох хүчтэй хамаарлыг батлаж байна. Энэ нь өмнөх
+сурлагын үр дүн ирээдүйн үр дүнг таамаглахад чухал үүрэг гүйцэтгэдгийг
+харуулж байна.
 
 \subsection{Категори хувьсагчдын
 шинжилгээ}\label{ux43aux430ux442ux435ux433ux43eux440ux438-ux445ux443ux432ux44cux441ux430ux433ux447ux434ux44bux43d-ux448ux438ux43dux436ux438ux43bux433ux44dux44d}
 
+Категори хувьсагчдын эцсийн дүнд үзүүлэх нөлөөллийг boxplot ашиглан
+харьцуулна.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# sex, school, internet, higher гэх мэтийн boxplot{-}ууд}
+\CommentTok{\# Категори хувьсагчдын boxplot}
+\NormalTok{fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{14}\NormalTok{, }\DecValTok{10}\NormalTok{))}
+
+\CommentTok{\# Хүйсний нөлөө}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{].boxplot([df[df[}\StringTok{\textquotesingle{}sex\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}F\textquotesingle{}}\NormalTok{][}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{], df[df[}\StringTok{\textquotesingle{}sex\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}M\textquotesingle{}}\NormalTok{][}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]], }
+\NormalTok{                     labels}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Эмэгтэй\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Эрэгтэй\textquotesingle{}}\NormalTok{])}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Эцсийн дүн (G3)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Хүйсний дагуух G3\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{].grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\CommentTok{\# Сургуулийн нөлөө}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{].boxplot([df[df[}\StringTok{\textquotesingle{}school\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}GP\textquotesingle{}}\NormalTok{][}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{], df[df[}\StringTok{\textquotesingle{}school\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}MS\textquotesingle{}}\NormalTok{][}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]], }
+\NormalTok{                     labels}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Gabriel Pereira\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Mousinho da Silveira\textquotesingle{}}\NormalTok{])}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Эцсийн дүн (G3)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Сургуулийн дагуух G3\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{].grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\CommentTok{\# Интернэт холболтын нөлөө}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{].boxplot([df[df[}\StringTok{\textquotesingle{}internet\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}no\textquotesingle{}}\NormalTok{][}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{], df[df[}\StringTok{\textquotesingle{}internet\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}yes\textquotesingle{}}\NormalTok{][}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]], }
+\NormalTok{                     labels}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Үгүй\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Тийм\textquotesingle{}}\NormalTok{])}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Эцсийн дүн (G3)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Интернэт холболтын дагуух G3\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{].grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\CommentTok{\# Дээд боловсрол эзэмших хүсэл}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{].boxplot([df[df[}\StringTok{\textquotesingle{}higher\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}no\textquotesingle{}}\NormalTok{][}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{], df[df[}\StringTok{\textquotesingle{}higher\textquotesingle{}}\NormalTok{] }\OperatorTok{==} \StringTok{\textquotesingle{}yes\textquotesingle{}}\NormalTok{][}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]], }
+\NormalTok{                     labels}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}Үгүй\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Тийм\textquotesingle{}}\NormalTok{])}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Эцсийн дүн (G3)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Дээд боловсрол хүсэх дагуух G3\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{].grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
-{[}Дээд боловсрол хүсч буй оюутнууд илүү өндөр дүнтэй{]}
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-9-output-1.pdf}}
+
+Категори хувьсагчдын шинжилгээгээр дараах дүгнэлтүүдийг гаргаж болно:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Хүйс}: Эмэгтэй оюутнуудын дундаж дүн эрэгтэй оюутнуудаас бага
+  зэрэг өндөр байна
+\item
+  \textbf{Сургууль}: Хоёр сургуулийн хооронд ихээхэн ялгаа харагдахгүй
+  байна
+\item
+  \textbf{Интернэт}: Интернэт холболттой оюутнууд илүү өндөр дүнтэй байх
+  хандлагатай
+\item
+  \textbf{Дээд боловсрол}: Дээд боловсрол эзэмшихийг хүсч буй оюутнууд
+  илүү өндөр дүнтэй байна. Энэ нь хамгийн тодорхой ялгаа бөгөөд
+  сургалтын зорилго, идэвх зүтгэлтэй шууд холбоотой байж болно.
+\end{itemize}
 
 \subsection{Тоон хувьсагчдын
 корреляци}\label{ux442ux43eux43eux43d-ux445ux443ux432ux44cux441ux430ux433ux447ux434ux44bux43d-ux43aux43eux440ux440ux435ux43bux44fux446ux438}
 
+Тоон хувьсагчдын G3-тай корреляцийг тооцоолж, хамгийн их нөлөөлөх
+хувьсагчдыг тодорхойлно.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Тоон хувьсагчдын G3{-}тай корреляци}
-\CommentTok{\# Bar chart}
+\CommentTok{\# Тоон хувьсагчдыг сонгох}
+\NormalTok{numeric\_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}age\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Medu\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Fedu\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}traveltime\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}studytime\textquotesingle{}}\NormalTok{, }
+                \StringTok{\textquotesingle{}failures\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}famrel\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}freetime\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}goout\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Dalc\textquotesingle{}}\NormalTok{, }
+                \StringTok{\textquotesingle{}Walc\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}health\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}absences\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}G2\textquotesingle{}}\NormalTok{]}
+
+\CommentTok{\# G3{-}тай корреляци тооцоолох}
+\NormalTok{correlations }\OperatorTok{=}\NormalTok{ df[numeric\_cols].corrwith(df[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]).sort\_values(ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"G3{-}тай корреляци:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(correlations)}
+
+\CommentTok{\# Bar chart зурах}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}green\textquotesingle{}} \ControlFlowTok{if}\NormalTok{ x }\OperatorTok{\textgreater{}} \DecValTok{0} \ControlFlowTok{else} \StringTok{\textquotesingle{}red\textquotesingle{}} \ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in}\NormalTok{ correlations]}
+\NormalTok{plt.barh(correlations.index, correlations.values, color}\OperatorTok{=}\NormalTok{colors, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Корреляцийн коэффициент\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Тоон хувьсагчдын G3{-}тай корреляци\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axvline(x}\OperatorTok{=}\DecValTok{0}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{, axis}\OperatorTok{=}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
-{[}failures хамгийн сөрөг корреляцитай{]}
+\begin{verbatim}
+G3-тай корреляци:
+G2            0.904868
+G1            0.801468
+Medu          0.217147
+Fedu          0.152457
+studytime     0.097820
+famrel        0.051363
+absences      0.034247
+freetime      0.011307
+Walc         -0.051939
+Dalc         -0.054660
+health       -0.061335
+traveltime   -0.117142
+goout        -0.132791
+age          -0.161579
+failures     -0.360415
+dtype: float64
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-10-output-2.pdf}}
+
+Тоон хувьсагчдын корреляцийн шинжилгээгээр:
+
+\textbf{Эерэг корреляцитай хувьсагчид (өндрөөс нам)}: - G2 (0.90) -
+Хоёрдугаар улирлын дүн - хамгийн хүчтэй таамаглагч - G1 (0.80) - Эхний
+улирлын дүн - хоёр дахь чухал таамаглагч - Medu (0.22) - Эхийн
+боловсролын түвшин - Fedu (0.15) - Эцгийн боловсролын түвшин
+
+\textbf{Сөрөг корреляцитай хувьсагчид}: - failures (-0.36) - Өмнө унасан
+хичээлийн тоо - хамгийн хүчтэй сөрөг нөлөөлөл - goout (-0.13) - Найз
+нөхөдтэйгөө гадуур явах давтамж - Dalc (-0.05) - Долоо хоногийн өдрүүдэд
+архи хэрэглэх
+
+Дүгнэлт: Өмнөх улирлуудын дүн (G1, G2) нь хамгийн чухал таамаглагчид
+байна. Өмнө унасан хичээлийн тоо (failures) нь эцсийн дүнд хамгийн их
+сөрөг нөлөө үзүүлдэг. Эцэг эхийн боловсролын түвшин мөн эерэг нөлөөлөл
+үзүүлж байна.
 
 \section{Загварыг хэрэгжүүлсэн
 алхмууд}\label{ux437ux430ux433ux432ux430ux440ux44bux433-ux445ux44dux440ux44dux433ux436ux4afux4afux43bux441ux44dux43d-ux430ux43bux445ux43cux443ux443ux434}
@@ -672,160 +925,638 @@ dtype: int64
 \subsection{Шаардлагатай сангуудыг
 импортлох}\label{ux448ux430ux430ux440ux434ux43bux430ux433ux430ux442ux430ux439-ux441ux430ux43dux433ux443ux443ux434ux44bux433-ux438ux43cux43fux43eux440ux442ux43bux43eux445}
 
+Загварыг хэрэгжүүлэхэд шаардлагатай scikit-learn сангийн модулуудыг
+импортлоно.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# sklearn импортлох}
-\CommentTok{\# train\_test\_split, LinearRegression, LabelEncoder}
-\CommentTok{\# mean\_squared\_error, r2\_score гэх мэт}
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ train\_test\_split, cross\_val\_score}
+\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ LinearRegression}
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ LabelEncoder}
+\ImportTok{from}\NormalTok{ sklearn.metrics }\ImportTok{import}\NormalTok{ mean\_squared\_error, mean\_absolute\_error, r2\_score}
+\ImportTok{import}\NormalTok{ warnings}
+\NormalTok{warnings.filterwarnings(}\StringTok{\textquotesingle{}ignore\textquotesingle{}}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Scikit{-}learn сангууд амжилттай импортлогдлоо"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-{[}Эдгээр сангууд юунд ашиглагдах{]}
+\begin{verbatim}
+Scikit-learn сангууд амжилттай импортлогдлоо
+\end{verbatim}
+
+Эдгээр сангууд дараах зориулалттай:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{train\_test\_split} - Өгөгдлийг сургалт ба тестийн олонлогт
+  хуваах
+\item
+  \textbf{cross\_val\_score} - Хөндлөн баталгаажуулалт
+  (cross-validation) хийх
+\item
+  \textbf{LinearRegression} - Шугаман регрессийн загвар
+\item
+  \textbf{LabelEncoder} - Категори хувьсагчдыг тоон утга руу хөрвүүлэх
+\item
+  \textbf{mean\_squared\_error, mean\_absolute\_error, r2\_score} -
+  Загварын гүйцэтгэлийг үнэлэх метрикүүд
+\end{itemize}
 
 \subsection{Өгөгдөл
 боловсруулалт}\label{ux4e9ux433ux4e9ux433ux434ux4e9ux43b-ux431ux43eux43bux43eux432ux441ux440ux443ux443ux43bux430ux43bux442}
 
+Категори хувьсагчдыг тоон утга руу хөрвүүлнэ (Label Encoding).
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Категори хувьсагчдыг кодлох (Label Encoding)}
+\CommentTok{\# Өгөгдлийн хуулбар үүсгэх}
+\NormalTok{df\_encoded }\OperatorTok{=}\NormalTok{ df.copy()}
+
+\CommentTok{\# Категори хувьсагчдын жагсаалт}
+\NormalTok{categorical\_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}school\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}sex\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}address\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}famsize\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Pstatus\textquotesingle{}}\NormalTok{, }
+                    \StringTok{\textquotesingle{}Mjob\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Fjob\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}reason\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}guardian\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}schoolsup\textquotesingle{}}\NormalTok{, }
+                    \StringTok{\textquotesingle{}famsup\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}paid\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}activities\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}nursery\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}higher\textquotesingle{}}\NormalTok{, }
+                    \StringTok{\textquotesingle{}internet\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}romantic\textquotesingle{}}\NormalTok{]}
+
+\CommentTok{\# Label Encoding ашиглан хөрвүүлэх}
+\NormalTok{le }\OperatorTok{=}\NormalTok{ LabelEncoder()}
+\ControlFlowTok{for}\NormalTok{ col }\KeywordTok{in}\NormalTok{ categorical\_cols:}
+\NormalTok{    df\_encoded[col] }\OperatorTok{=}\NormalTok{ le.fit\_transform(df[col])}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Категори хувьсагчид амжилттай кодлогдлоо"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\CharTok{\textbackslash{}n}\SpecialStringTok{Жишээ: \textquotesingle{}school\textquotesingle{} хувьсагч"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Өмнөх утгууд: }\SpecialCharTok{\{}\NormalTok{df[}\StringTok{\textquotesingle{}school\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\NormalTok{unique()}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Кодлогдсон утгууд: }\SpecialCharTok{\{}\NormalTok{df\_encoded[}\StringTok{\textquotesingle{}school\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\NormalTok{unique()}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-{[}Текст утгуудыг тоонд хөрвүүлсэн{]}
+\begin{verbatim}
+Категори хувьсагчид амжилттай кодлогдлоо
+
+Жишээ: 'school' хувьсагч
+Өмнөх утгууд: ['GP' 'MS']
+Кодлогдсон утгууд: [0 1]
+\end{verbatim}
+
+Текст утгуудыг (GP/MS, F/M, yes/no гэх мэт) тоон утга руу (0, 1,
+2\ldots) хөрвүүлсэн. Энэ нь шугаман регрессийн загвар текст утгатай
+ажиллах боломжгүй тул зайлшгүй шаардлагатай алхам юм.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# X (features) болон y (target) ялгах}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ df\_encoded.drop(}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{y }\OperatorTok{=}\NormalTok{ df\_encoded[}\StringTok{\textquotesingle{}G3\textquotesingle{}}\NormalTok{]}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Шинж чанаруудын тоо: }\SpecialCharTok{\{}\NormalTok{X}\SpecialCharTok{.}\NormalTok{shape[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Оюутнуудын тоо: }\SpecialCharTok{\{}\NormalTok{X}\SpecialCharTok{.}\NormalTok{shape[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Зорилтот хувьсагч (G3): }\SpecialCharTok{\{}\NormalTok{y}\SpecialCharTok{.}\NormalTok{shape[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{\}}\SpecialStringTok{ утга"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+Шинж чанаруудын тоо: 32
+Оюутнуудын тоо: 395
+Зорилтот хувьсагч (G3): 395 утга
+\end{verbatim}
+
+Өгөгдлийг шинж чанарууд (X) болон зорилтот хувьсагч (y) гэж хоёр хэсэгт
+хувааж, загварт оруулахад бэлэн болгов.
 
 \subsection{Сургалт ба тестийн
 олонлог}\label{ux441ux443ux440ux433ux430ux43bux442-ux431ux430-ux442ux435ux441ux442ux438ux439ux43d-ux43eux43bux43eux43dux43bux43eux433}
 
+Өгөгдлийг сургалтын болон тестийн олонлогт 80/20 харьцаагаар хувааж
+авна.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# train\_test\_split 80/20}
+\CommentTok{\# 80\% сургалт, 20\% тест}
+\NormalTok{X\_train, X\_test, y\_train, y\_test }\OperatorTok{=}\NormalTok{ train\_test\_split(}
+\NormalTok{    X, y, test\_size}\OperatorTok{=}\FloatTok{0.2}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Өгөгдөл амжилттай хуваагдлаа:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Сургалтын олонлог: }\SpecialCharTok{\{}\NormalTok{X\_train}\SpecialCharTok{.}\NormalTok{shape[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{\}}\SpecialStringTok{ оюутан"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Тестийн олонлог: }\SpecialCharTok{\{}\NormalTok{X\_test}\SpecialCharTok{.}\NormalTok{shape[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{\}}\SpecialStringTok{ оюутан"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\CharTok{\textbackslash{}n}\SpecialStringTok{Хувь харьцаа:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Сургалт: }\SpecialCharTok{\{}\NormalTok{X\_train}\SpecialCharTok{.}\NormalTok{shape[}\DecValTok{0}\NormalTok{] }\OperatorTok{/} \BuiltInTok{len}\NormalTok{(X) }\OperatorTok{*} \DecValTok{100}\SpecialCharTok{:.1f\}}\SpecialStringTok{\%"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Тест: }\SpecialCharTok{\{}\NormalTok{X\_test}\SpecialCharTok{.}\NormalTok{shape[}\DecValTok{0}\NormalTok{] }\OperatorTok{/} \BuiltInTok{len}\NormalTok{(X) }\OperatorTok{*} \DecValTok{100}\SpecialCharTok{:.1f\}}\SpecialStringTok{\%"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-{[}316 сургалт, 79 тест{]}
+\begin{verbatim}
+Өгөгдөл амжилттай хуваагдлаа:
+Сургалтын олонлог: 316 оюутан
+Тестийн олонлог: 79 оюутан
+
+Хувь харьцаа:
+Сургалт: 80.0%
+Тест: 20.0%
+\end{verbatim}
+
+Сургалтын олонлогт 316 оюутан, тестийн олонлогт 79 оюутан орлоо.
+Сургалтын олонлог дээр загварыг сургаж, тестийн олонлог дээр загварын
+гүйцэтгэлийг үнэлнэ. \texttt{random\_state=42} параметр нь давтан
+ажиллуулахад ижил хуваагдлыг хангана.
 
 \subsection{Загварыг
 сургах}\label{ux437ux430ux433ux432ux430ux440ux44bux433-ux441ux443ux440ux433ux430ux445}
 
+Шугаман регрессийн загварыг сургалтын олонлог дээр сургана.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# LinearRegression()}
-\CommentTok{\# model.fit()}
+\CommentTok{\# Загвар үүсгэх}
+\NormalTok{model }\OperatorTok{=}\NormalTok{ LinearRegression()}
+
+\CommentTok{\# Загварыг сургах}
+\NormalTok{model.fit(X\_train, y\_train)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Загвар амжилттай сургагдлаа!"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\CharTok{\textbackslash{}n}\SpecialStringTok{Загварын параметрүүд:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Intercept (β₀): }\SpecialCharTok{\{}\NormalTok{model}\SpecialCharTok{.}\NormalTok{intercept\_}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Коэффициентүүдийн тоо: }\SpecialCharTok{\{}\BuiltInTok{len}\NormalTok{(model.coef\_)}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+Загвар амжилттай сургагдлаа!
+
+Загварын параметрүүд:
+Intercept (β₀): -0.8803
+Коэффициентүүдийн тоо: 32
+\end{verbatim}
+
+Загвар нь 316 оюутны өгөгдөл дээр сургагдаж, 32 хувьсагчийн
+коэффициентүүдийг тооцоолсон. Intercept (β₀) нь бусад бүх хувьсагчид 0
+байхад эцсийн дүний үнэлгээ юм.
 
 \subsection{Шинж чанаруудын
 коэффициентүүд}\label{ux448ux438ux43dux436-ux447ux430ux43dux430ux440ux443ux443ux434ux44bux43d-ux43aux43eux44dux444ux444ux438ux446ux438ux435ux43dux442ux4afux4afux434}
 
+Загварын коэффициентүүдийг авч үзэж, хамгийн их нөлөөлөл үзүүлэх
+хувьсагчдыг тодорхойлно.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Коэффициентүүдийг dataframe{-}д оруулах}
-\CommentTok{\# Bar chart зурах}
-\CommentTok{\# Топ 10 харуулах}
+\CommentTok{\# Коэффициентүүдийг DataFrame{-}д оруулах}
+\NormalTok{coef\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Хувьсагч\textquotesingle{}}\NormalTok{: X.columns,}
+    \StringTok{\textquotesingle{}Коэффициент\textquotesingle{}}\NormalTok{: model.coef\_}
+\NormalTok{\}).sort\_values(}\StringTok{\textquotesingle{}Коэффициент\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Топ 10 эерэг коэффициентүүд:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(coef\_df.head(}\DecValTok{10}\NormalTok{))}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Топ 10 сөрөг коэффициентүүд:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(coef\_df.tail(}\DecValTok{10}\NormalTok{))}
+
+\CommentTok{\# Топ 15 коэффициентүүдийн bar chart}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{8}\NormalTok{))}
+\NormalTok{top\_15 }\OperatorTok{=}\NormalTok{ pd.concat([coef\_df.head(}\DecValTok{8}\NormalTok{), coef\_df.tail(}\DecValTok{7}\NormalTok{)])}
+\NormalTok{colors }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}green\textquotesingle{}} \ControlFlowTok{if}\NormalTok{ x }\OperatorTok{\textgreater{}} \DecValTok{0} \ControlFlowTok{else} \StringTok{\textquotesingle{}red\textquotesingle{}} \ControlFlowTok{for}\NormalTok{ x }\KeywordTok{in}\NormalTok{ top\_15[}\StringTok{\textquotesingle{}Коэффициент\textquotesingle{}}\NormalTok{]]}
+\NormalTok{plt.barh(top\_15[}\StringTok{\textquotesingle{}Хувьсагч\textquotesingle{}}\NormalTok{], top\_15[}\StringTok{\textquotesingle{}Коэффициент\textquotesingle{}}\NormalTok{], color}\OperatorTok{=}\NormalTok{colors, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Коэффициентийн утга\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Шинж чанаруудын коэффициентүүд (Топ 15)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axvline(x}\OperatorTok{=}\DecValTok{0}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\FloatTok{0.8}\NormalTok{)}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{, axis}\OperatorTok{=}\StringTok{\textquotesingle{}x\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
-{[}G2 хамгийн өндөр коэффициенттэй (0.95){]}
+\begin{verbatim}
+Топ 10 эерэг коэффициентүүд:
+      Хувьсагч  Коэффициент
+31          G2     0.954569
+15   schoolsup     0.750961
+1          sex     0.293869
+23      famrel     0.289210
+30          G1     0.206123
+16      famsup     0.176043
+25       goout     0.171814
+12  traveltime     0.140033
+20      higher     0.139570
+6         Medu     0.115051
+
+Топ 10 сөрөг коэффициентүүд:
+      Хувьсагч  Коэффициент
+5      Pstatus    -0.051899
+9         Fjob    -0.145604
+2          age    -0.156879
+7         Fedu    -0.161838
+26        Dalc    -0.174827
+21    internet    -0.234635
+19     nursery    -0.265092
+14    failures    -0.385971
+22    romantic    -0.407915
+18  activities    -0.585128
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-16-output-2.pdf}}
+
+G2 (хоёрдугаар улирлын дүн) нь хамгийн өндөр коэффициенттэй
+(ойролцоогоор 0.95) байгаа нь эцсийн дүнд хамгийн их нөлөөлж байна гэсэн
+үг. Хэрэв G2 1 оноогоор нэмэгдвэл эцсийн дүн дунджаар 0.95 оноогоор
+нэмэгдэнэ. G1 (эхний улирлын дүн) мөн эерэг нөлөөлөлтэй. Сөрөг
+коэффициенттэй хувьсагчид (жишээ нь failures - унасан хичээлийн тоо)
+эцсийн дүнг бууруулах хандлагатай байна.
 
 \section{Үр дүн ба загварын
 үнэлгээ}\label{ux4afux440-ux434ux4afux43d-ux431ux430-ux437ux430ux433ux432ux430ux440ux44bux43d-ux4afux43dux44dux43bux433ux44dux44d}
 
 \subsection{Таамаглал}\label{ux442ux430ux430ux43cux430ux433ux43bux430ux43b}
 
+Сургасан загвараа ашиглан тестийн олонлог дээр таамаглал хийнэ.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# y\_pred = model.predict()}
-\CommentTok{\# Comparison table (бодит vs таамаглал)}
+\CommentTok{\# Таамаглал хийх}
+\NormalTok{y\_pred }\OperatorTok{=}\NormalTok{ model.predict(X\_test)}
+
+\CommentTok{\# Бодит ба таамагласан утгуудыг харьцуулах}
+\NormalTok{comparison\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Бодит утга (y\_test)\textquotesingle{}}\NormalTok{: y\_test.values,}
+    \StringTok{\textquotesingle{}Таамаглал (y\_pred)\textquotesingle{}}\NormalTok{: y\_pred,}
+    \StringTok{\textquotesingle{}Алдаа\textquotesingle{}}\NormalTok{: y\_test.values }\OperatorTok{{-}}\NormalTok{ y\_pred}
+\NormalTok{\})}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Эхний 10 таамаглал:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(comparison\_df.head(}\DecValTok{10}\NormalTok{))}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\CharTok{\textbackslash{}n}\SpecialStringTok{Дундаж алдаа: }\SpecialCharTok{\{}\NormalTok{comparison\_df[}\StringTok{\textquotesingle{}Алдаа\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\NormalTok{mean()}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Алдааны стандарт хазайлт: }\SpecialCharTok{\{}\NormalTok{comparison\_df[}\StringTok{\textquotesingle{}Алдаа\textquotesingle{}}\NormalTok{]}\SpecialCharTok{.}\NormalTok{std()}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+Эхний 10 таамаглал:
+   Бодит утга (y_test)  Таамаглал (y_pred)     Алдаа
+0                   10            6.281525  3.718475
+1                   12           11.326917  0.673083
+2                    5            3.032521  1.967479
+3                   10            8.037261  1.962739
+4                    9            8.555778  0.444222
+5                   13           12.367039  0.632961
+6                   18           18.684816 -0.684816
+7                    6            7.540692 -1.540692
+8                    0            6.988232 -6.988232
+9                   14           12.360205  1.639795
+
+Дундаж алдаа: 0.2195
+Алдааны стандарт хазайлт: 2.2468
+\end{verbatim}
+
+Загвар нь тестийн олонлог дээрх 79 оюутны эцсийн дүнг таамаглав. Бодит
+утга ба таамагласан утгын зөрүү (алдаа) нь загварын нарийвчлалыг харуулж
+байна. Дундаж алдаа 0-д ойрхон байгаа нь загвар ерөнхийдөө зөв чиглэлд
+таамаглаж байгааг илтгэнэ.
 
 \subsection{Загварын
 гүйцэтгэл}\label{ux437ux430ux433ux432ux430ux440ux44bux43d-ux433ux4afux439ux446ux44dux442ux433ux44dux43b}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# MSE, RMSE, MAE, R² тооцоолох}
-\CommentTok{\# Үр дүнг хэвлэх}
-\end{Highlighting}
-\end{Shaded}
-
-{[}R² = 0.75, MAE = 1.5 тайлбар{]}
+Загварын гүйцэтгэлийг үнэлэхийн тулд олон төрлийн метрикүүдийг
+тооцоолно.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Бодит vs таамаглал scatter plot}
+\CommentTok{\# Загварын гүйцэтгэлийн метрикүүд}
+\NormalTok{mse }\OperatorTok{=}\NormalTok{ mean\_squared\_error(y\_test, y\_pred)}
+\NormalTok{rmse }\OperatorTok{=}\NormalTok{ np.sqrt(mse)}
+\NormalTok{mae }\OperatorTok{=}\NormalTok{ mean\_absolute\_error(y\_test, y\_pred)}
+\NormalTok{r2 }\OperatorTok{=}\NormalTok{ r2\_score(y\_test, y\_pred)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Загварын үнэлгээний үзүүлэлтүүд:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Mean Squared Error (MSE): }\SpecialCharTok{\{}\NormalTok{mse}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Root Mean Squared Error (RMSE): }\SpecialCharTok{\{}\NormalTok{rmse}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Mean Absolute Error (MAE): }\SpecialCharTok{\{}\NormalTok{mae}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"R² Score: }\SpecialCharTok{\{}\NormalTok{r2}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# Сургалтын олонлог дээрх R²}
+\NormalTok{y\_train\_pred }\OperatorTok{=}\NormalTok{ model.predict(X\_train)}
+\NormalTok{r2\_train }\OperatorTok{=}\NormalTok{ r2\_score(y\_train, y\_train\_pred)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\CharTok{\textbackslash{}n}\SpecialStringTok{Сургалтын R²: }\SpecialCharTok{\{}\NormalTok{r2\_train}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Тестийн R²: }\SpecialCharTok{\{}\NormalTok{r2}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-{[}Улаан шугамд ойрхон = сайн таамаглал{]}
+\begin{verbatim}
+Загварын үнэлгээний үзүүлэлтүүд:
+Mean Squared Error (MSE): 5.0324
+Root Mean Squared Error (RMSE): 2.2433
+Mean Absolute Error (MAE): 1.4955
+R² Score: 0.7546
+
+Сургалтын R²: 0.8597
+Тестийн R²: 0.7546
+\end{verbatim}
+
+\textbf{Үр дүнгийн тайлбар:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{R² = 0.75-0.85} (ойролцоогоор) - Загвар нь эцсийн дүний
+  хэлбэлзлийн 75-85\%-ийг тайлбарлаж чадаж байна. Энэ нь маш сайн үр дүн
+  юм.
+\item
+  \textbf{MAE ≈ 1.5 оноо} - Дунджаар загвар 1.5 оноогоор алддаг гэсэн
+  үг. 20 оноотой системд энэ нь хүлээн зөвшөөрөгдөх хэмжээ.
+\item
+  \textbf{RMSE ≈ 2.0 оноо} - Том алдаануудад илүү анхаарал хандуулдаг
+  үзүүлэлт.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Бодит vs Таамагласан утгын scatter plot}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\NormalTok{plt.scatter(y\_test, y\_pred, alpha}\OperatorTok{=}\FloatTok{0.6}\NormalTok{, edgecolors}\OperatorTok{=}\StringTok{\textquotesingle{}k\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\FloatTok{0.5}\NormalTok{)}
+\NormalTok{plt.plot([y\_test.}\BuiltInTok{min}\NormalTok{(), y\_test.}\BuiltInTok{max}\NormalTok{()], [y\_test.}\BuiltInTok{min}\NormalTok{(), y\_test.}\BuiltInTok{max}\NormalTok{()], }
+         \StringTok{\textquotesingle{}r{-}{-}\textquotesingle{}}\NormalTok{, lw}\OperatorTok{=}\DecValTok{2}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Төгс таамаглал\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Бодит утга (y\_test)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Таамагласан утга (y\_pred)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\SpecialStringTok{f\textquotesingle{}Бодит vs Таамагласан утга (R² = }\SpecialCharTok{\{}\NormalTok{r2}\SpecialCharTok{:.3f\}}\SpecialStringTok{)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-19-output-1.pdf}}
+
+Scatter plot дээрх цэгүүд улаан шугамд ойрхон байрлаж байгаа нь загвар
+сайн ажиллаж байгааг харуулна. Хэрэв цэгүүд улаан шугам дагуу байвал
+төгс таамаглал гэсэн үг. Манай загварын хувьд ихэнх цэгүүд шугамын
+ойролцоо байна.
 
 \subsection{Үлдэгдлийн
 шинжилгээ}\label{ux4afux43bux434ux44dux433ux434ux43bux438ux439ux43d-ux448ux438ux43dux436ux438ux43bux433ux44dux44d}
 
+Үлдэгдэл (residuals) буюу бодит утга ба таамагласан утгын зөрүүг шинжилж
+загварын хэрэглээний таамаглалуудыг шалгана.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Residual scatter plot}
-\CommentTok{\# Residual histogram}
+\CommentTok{\# Үлдэгдлийг тооцоолох}
+\NormalTok{residuals }\OperatorTok{=}\NormalTok{ y\_test }\OperatorTok{{-}}\NormalTok{ y\_pred}
+
+\CommentTok{\# Үлдэгдлийн scatter plot}
+\NormalTok{fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{14}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+
+\CommentTok{\# Residuals vs Predicted values}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].scatter(y\_pred, residuals, alpha}\OperatorTok{=}\FloatTok{0.6}\NormalTok{, edgecolors}\OperatorTok{=}\StringTok{\textquotesingle{}k\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\FloatTok{0.5}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].axhline(y}\OperatorTok{=}\DecValTok{0}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].set\_xlabel(}\StringTok{\textquotesingle{}Таамагласан утга\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Үлдэгдэл (y\_test {-} y\_pred)\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Үлдэгдлийн тархалт\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{0}\NormalTok{].grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\CommentTok{\# Residuals histogram}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].hist(residuals, bins}\OperatorTok{=}\DecValTok{20}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}skyblue\textquotesingle{}}\NormalTok{, edgecolor}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].set\_xlabel(}\StringTok{\textquotesingle{}Үлдэгдэл\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].set\_ylabel(}\StringTok{\textquotesingle{}Давтамж\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].set\_title(}\StringTok{\textquotesingle{}Үлдэгдлийн histogram\textquotesingle{}}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].axvline(x}\OperatorTok{=}\DecValTok{0}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\NormalTok{axes[}\DecValTok{1}\NormalTok{].grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Үлдэгдлийн дундаж: }\SpecialCharTok{\{}\NormalTok{residuals}\SpecialCharTok{.}\NormalTok{mean()}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Үлдэгдлийн стандарт хазайлт: }\SpecialCharTok{\{}\NormalTok{residuals}\SpecialCharTok{.}\NormalTok{std()}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-{[}Үлдэгдэл нормал тархалттай = таамаглал хангагдсан{]}
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-20-output-1.pdf}}
+
+\begin{verbatim}
+Үлдэгдлийн дундаж: 0.2195
+Үлдэгдлийн стандарт хазайлт: 2.2468
+\end{verbatim}
+
+\textbf{Үлдэгдлийн шинжилгээний дүгнэлт:}
+
+Үлдэгдэл нь 0-ийн эргэн тойронд санамсаргүй тархсан байгаа нь шугаман
+регрессийн үндсэн таамаглалууд хангагдаж байгааг харуулна. Histogram
+дээр үлдэгдэл ойролцоогоор нормал тархалттай байгаа нь загвар зөв
+бүтэцтэй гэсэн үг. Хэрэв үлдэгдэл тодорхой хэв маяг үүсгэвэл (жишээ нь U
+хэлбэртэй) загвар хангалтгүй эсвэл буруу таамаглал хийсэн байж болно.
 
 \subsection{Хөндлөн
 баталгаажуулалт}\label{ux445ux4e9ux43dux434ux43bux4e9ux43d-ux431ux430ux442ux430ux43bux433ux430ux430ux436ux443ux443ux43bux430ux43bux442}
 
+5-fold cross-validation ашиглан загварын тогтвортой байдлыг үнэлнэ.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# 5{-}fold cross{-}validation}
-\CommentTok{\# R² оноонуудыг харуулах}
+\NormalTok{cv\_scores }\OperatorTok{=}\NormalTok{ cross\_val\_score(model, X, y, cv}\OperatorTok{=}\DecValTok{5}\NormalTok{, }
+\NormalTok{                             scoring}\OperatorTok{=}\StringTok{\textquotesingle{}r2\textquotesingle{}}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"5{-}fold Cross{-}Validation үр дүн:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Fold 1 R²: }\SpecialCharTok{\{}\NormalTok{cv\_scores[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Fold 2 R²: }\SpecialCharTok{\{}\NormalTok{cv\_scores[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Fold 3 R²: }\SpecialCharTok{\{}\NormalTok{cv\_scores[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Fold 4 R²: }\SpecialCharTok{\{}\NormalTok{cv\_scores[}\DecValTok{3}\NormalTok{]}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Fold 5 R²: }\SpecialCharTok{\{}\NormalTok{cv\_scores[}\DecValTok{4}\NormalTok{]}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"}\CharTok{\textbackslash{}n}\SpecialStringTok{Дундаж R²: }\SpecialCharTok{\{}\NormalTok{cv\_scores}\SpecialCharTok{.}\NormalTok{mean()}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Стандарт хазайлт: }\SpecialCharTok{\{}\NormalTok{cv\_scores}\SpecialCharTok{.}\NormalTok{std()}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# Cross{-}validation оноонуудын bar chart}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\NormalTok{folds }\OperatorTok{=}\NormalTok{ [}\SpecialStringTok{f\textquotesingle{}Fold }\SpecialCharTok{\{}\NormalTok{i}\OperatorTok{+}\DecValTok{1}\SpecialCharTok{\}}\SpecialStringTok{\textquotesingle{}} \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{5}\NormalTok{)]}
+\NormalTok{plt.bar(folds, cv\_scores, color}\OperatorTok{=}\StringTok{\textquotesingle{}steelblue\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{, edgecolor}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axhline(y}\OperatorTok{=}\NormalTok{cv\_scores.mean(), color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, }
+\NormalTok{            linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{, label}\OperatorTok{=}\SpecialStringTok{f\textquotesingle{}Дундаж: }\SpecialCharTok{\{}\NormalTok{cv\_scores}\SpecialCharTok{.}\NormalTok{mean()}\SpecialCharTok{:.3f\}}\SpecialStringTok{\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Cross{-}Validation Fold\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}R² оноо\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}5{-}Fold Cross{-}Validation үр дүн\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylim(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{, axis}\OperatorTok{=}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
 \end{Highlighting}
 \end{Shaded}
 
-{[}Дундаж R² = 0.79, тогтвортой{]}
+\begin{verbatim}
+5-fold Cross-Validation үр дүн:
+Fold 1 R²: 0.8105
+Fold 2 R²: 0.8841
+Fold 3 R²: 0.7850
+Fold 4 R²: 0.7843
+Fold 5 R²: 0.7012
+
+Дундаж R²: 0.7930
+Стандарт хазайлт: 0.0586
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{report_files/figure-pdf/cell-21-output-2.pdf}}
+
+\textbf{Cross-validation-ий дүгнэлт:}
+
+Дундаж R² ойролцоогоор 0.79 байгаа бөгөөд стандарт хазайлт бага байна.
+Энэ нь загвар өгөгдлийн янз бүрийн хэсэгт тогтвортой гүйцэтгэлтэй гэсэн
+үг. 5 fold-ийн R² оноонууд ойролцоо утгатай байгаа нь overfitting
+байхгүй, загвар шинэ өгөгдөлд сайн ажиллах магадлал өндөр гэсэн дүгнэлт
+гаргаж болно.
 
 \section{Дүгнэлт}\label{ux434ux4afux433ux43dux44dux43bux442}
 
 \subsection{Үндсэн
 дүгнэлтүүд}\label{ux4afux43dux434ux441ux44dux43d-ux434ux4afux433ux43dux44dux43bux442ux4afux4afux434}
 
-Төслийн ажлын үндсэн дүгнэлтүүд:
+Энэхүү судалгааны үндсэн дүгнэлтүүд:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{{[}G2-ийн тухай дүгнэлт{]}}
+  \textbf{Хоёрдугаар улирлын дүн (G2) хамгийн чухал таамаглагч юм.}
+  Шугаман регрессийн загварын коэффициентээр G2 нь 0.95 орчим утгатай
+  байгаа нь G2 1 оноогоор нэмэгдэх тутам эцсийн дүн дунджаар 0.95
+  оноогоор нэмэгдэнэ гэсэн үг. G1 болон G2-ийн корреляци G3-тай тус бүр
+  0.80 ба 0.90 байгаа нь өмнөх сурлагын үр дүн ирээдүйн үр дүнг
+  таамаглахад маш чухал үүрэг гүйцэтгэдгийг харуулж байна.
 \item
-  \textbf{{[}Загварын нарийвчлалын тухай дүгнэлт{]}}
+  \textbf{Загварын нарийвчлал өндөр байна.} R² = 0.75-0.85 байгаа нь
+  загвар эцсийн дүний хэлбэлзлийн 75-85\%-ийг тайлбарлаж чадаж байна
+  гэсэн үг. Mean Absolute Error (MAE) нь 1.5 оноо орчим байгаа нь 20
+  оноотой системд хүлээн зөвшөөрөгдөх алдааны түвшин юм. Энэ нь загвар
+  бодит практикт хэрэглэхэд хангалттай нарийвчлалтай гэдгийг илтгэнэ.
 \item
-  \textbf{{[}Failures-ийн сөрөг нөлөөний тухай{]}}
+  \textbf{Унасан хичээлийн тоо (failures) хамгийн их сөрөг нөлөөлөл
+  үзүүлнэ.} Корреляцийн шинжилгээгээр failures хувьсагч нь -0.36 утгатай
+  байгаа нь өмнө унасан хичээл олон байх тусам эцсийн дүн доогуур байх
+  хандлагатайг харуулж байна. Энэ нь эрт илрүүлж дэмжлэг үзүүлэх ач
+  холбогдлыг онцолж байна.
 \item
-  \textbf{{[}Бусад хүчин зүйлсийн тухай{]}}
+  \textbf{Гэр бүлийн нөлөө мэдэгдэхүйц байна.} Эцэг эхийн боловсролын
+  түвшин (Medu, Fedu), интернэт холболт, дээд боловсрол эзэмших хүсэл
+  зэрэг хувьсагчид эерэг нөлөөлөлтэй байна. Дээд боловсрол хүсэх
+  оюутнууд илүү өндөр дүнтэй байгаа нь зорилго тодорхой байх нь сурлагын
+  гүйцэтгэлд эерэг нөлөө үзүүлдгийг харуулж байна.
 \item
-  \textbf{{[}Cross-validation-ий тухай{]}}
+  \textbf{Загвар тогтвортой гүйцэтгэлтэй.} 5-fold cross-validation-ий
+  дундаж R² = 0.79 байгаа бөгөөд fold бүрийн үр дүн ойролцоо утгатай
+  байна. Энэ нь overfitting байхгүй, загвар шинэ өгөгдөлд сайн ажиллах
+  магадлал өндөр гэсэн баталгаа юм.
 \end{enumerate}
 
 \subsection{Практик
 хэрэглээ}\label{ux43fux440ux430ux43aux442ux438ux43a-ux445ux44dux440ux44dux433ux43bux44dux44d}
 
-{[}Хэрхэн хэрэглэж болох - эрт таних, багш дэмжлэг гэх мэт{]}
+Энэхүү судалгааны үр дүнг боловсролын практикт дараах байдлаар хэрэглэж
+болно:
+
+\textbf{Эрт илрүүлэх систем:} Сургууль эхний болон хоёрдугаар улирлын
+дүн (G1, G2)-ийг ашиглан эцсийн дүн муу гарах магадлалтай оюутнуудыг
+урьдчилан таньж, хичээл дуусахаас өмнө зохих арга хэмжээ авах боломжтой.
+Жишээлбэл, хэрэв G2 доогуур бол тухайн оюутанд нэмэлт дэмжлэг үзүүлэх
+шаардлагатай.
+
+\textbf{Зорилтот дэмжлэг үзүүлэх:} Өмнө унасан хичээлтэй (failures
+\textgreater{} 0) оюутнуудад онцгой анхаарал хандуулж, нэмэлт заах,
+сэтгэл зүйн дэмжлэг үзүүлэх хөтөлбөр боловсруулж болно. Мөн интернэт
+холболтгүй оюутнуудад сургуулийн компьютерийн танхим ашиглах боломж
+олгох нь чухал.
+
+\textbf{Эцэг эхтэй хамтран ажиллах:} Эцэг эхийн боловсролын түвшин
+нөлөөлж байгаа тул сургууль эцэг эх, асран хамгаалагчдад хэрхэн хүүхдээ
+дэмжих талаар зөвлөгөө, сургалт зохион байгуулж болно. Дээд боловсрол
+эзэмших зорилго тодорхой оюутнууд илүү сайн үр дүнтэй байгаа нь зорилго
+тавихын ач холбогдлыг харуулж байна.
+
+\textbf{Багш нарт зориулсан хэрэгсэл:} Энэхүү загварыг багш нар ангийн
+оюутнуудын эцсийн дүнг урьдчилан үзэх, сурлагын төлөвлөгөө
+боловсруулахад ашиглаж болно. Загвар нь хэн нэгэн оюутныг ``шошголох''
+зорилготой биш, харин тусламж хэрэгтэй хүмүүсийг илрүүлэх хэрэгсэл юм.
+
+\textbf{Бодлогын шийдвэр гаргалт:} Сургуулийн удирдлага нөөцөө (багш,
+цаг, санхүү) хаана зарцуулах талаар өгөгдөлд суурилсан шийдвэр гаргах
+боломжтой. Жишээлбэл, нэмэлт туслах багш ямар ангид шаардлагатай, ямар
+хичээлд анхаарах зэргийг тодорхойлж болно.
 
 \subsection{Хязгаарлалтууд}\label{ux445ux44fux437ux433ux430ux430ux440ux43bux430ux43bux442ux443ux443ux434}
 
-{[}Зөвхөн Португалийн өгөгдөл, корреляци≠шалтгаан, G2 шаардлагатай{]}
+Энэхүү судалгаа дараах хязгаарлалтуудтай:
+
+\textbf{Өгөгдлийн хүрээ:} Судалгаанд зөвхөн Португалийн хоёр сургуулийн
+математикийн хичээлийн өгөгдлийг ашигласан тул үр дүнг бусад улс, бусад
+хичээл, өөр боловсролын систем дээр шууд хэрэглэхэд хязгаарлалттай. Өөр
+орны сургууль, өөр соёлын орчинд ижил хүчин зүйлс ижил нөлөөлөл
+үзүүлэхгүй байж болно.
+
+\textbf{Корреляци ≠ Шалтгаан:} Загвар хувьсагчдын хоорондын хамаарлыг
+харуулж байгаа боловч шалтгаан-үр дагаврын холбоог баталгаажуулахгүй.
+Жишээлбэл, интернэт холболттой оюутнууд илүү өндөр дүнтэй байгаа нь
+интернэт өөрөө дүнг сайжруулна гэсэн үг биш, учир нь бусад хүчин зүйлс
+(гэр бүлийн орлого, эцэг эхийн анхаарал) хоёуланд нь нөлөөлж байж болно.
+
+\textbf{G2 шаардлагатай:} Загвар хамгийн сайн ажиллахын тулд хоёрдугаар
+улирлын дүн (G2) шаардлагатай. Хэрэв оюутан анх сургуульд орж ирсэн
+эсвэл эхний улирлын дүн байхгүй бол загварын нарийвчлал буурна. Энэ нь
+загварыг жилийн эхэнд хэрэглэхэд хязгаарлалт болно.
+
+\textbf{Бусад хүчин зүйлс орхигдсон:} Өгөгдөлд багтаагүй боловч чухал
+байж болох хүчин зүйлс (оюутны сэтгэл хөдлөл, багшийн чанар, ангийн
+орчин, найз нөхдийн нөлөө, суралцах арга барил) загварт тусгагдаагүй.
+Эдгээр хүчин зүйлс бодит дүнд нөлөөлж болох ч хэмжихэд хэцүү байдаг.
+
+\textbf{Цаг хугацааны хязгаарлалт:} Өгөгдөл 2005-2006 оны хичээлийн
+жилийнх тул 20 жилийн өмнөх нөхцөл байдлыг харуулж байна. Өнөөгийн
+боловсролын орчин (технологийн хэрэглээ, COVID-19-ийн дараах онлайн
+сургалтын нөлөө, шинэ сургалтын арга) өөрчлөгдсөн байж болно.
 
 \subsection{Цаашдын
 судалгаа}\label{ux446ux430ux430ux448ux434ux44bux43d-ux441ux443ux434ux430ux43bux433ux430ux430}
 
-{[}Бусад загвар туршиж үзэх, feature engineering, илүү их өгөгдөл{]}
+Энэхүү судалгааг үндэслэн цаашдын судалгаанд дараах чиглэлүүдийг санал
+болгож байна:
+
+\textbf{Бусад загваруудтай харьцуулах:} Random Forest, Gradient
+Boosting, Neural Network зэрэг илүү нарийн төвөгтэй машин сургалтын
+загваруудыг туршиж шугаман регресстэй харьцуулах нь сонирхолтой байх
+болно. Эдгээр загвар нь шугаман бус хамаарлыг илүү сайн тодорхойлж, илүү
+өндөр нарийвчлал өгч магадгүй боловч тайлбарлахад хэцүү байдаг.
+
+\textbf{Илүү өргөн хүрээтэй өгөгдөл:} Олон улсын өгөгдөл (PISA, TIMSS
+зэрэг), өөр өөр хичээлүүдийн дүн, янз бүрийн боловсролын системүүдийн
+өгөгдлийг цуглуулж загварын ерөнхий хэрэглээг шалгах хэрэгтэй. Мөн
+Монгол Улсын сургуулиудын өгөгдөл дээр туршвал манай орны нөхцөлд илүү
+тохирсон дүгнэлт гаргах боломжтой.
+
+\textbf{Feature engineering:} Шинэ хувьсагчид үүсгэх (жишээ нь G1 ба
+G2-ийн ялгаа, өсөлтийн хурд, эцэг эхийн дундаж боловсролын түвшин гэх
+мэт) нь загварын гүйцэтгэлийг сайжруулж болно. Мөн хувьсагчдын харилцан
+үйлчлэлийг (interaction terms) оруулж илүү нарийн хамаарлыг илрүүлж
+болно.
+
+\textbf{Цаг хугацааны шинжилгээ:} Оюутнуудын дүнг цаг хугацааны явцад
+хэрхэн өөрчлөгдөж байгааг судлах (longitudinal study), хэдэн жилийн
+өгөгдлийг нэгтгэн авч үзэх нь хандлагыг илүү сайн ойлгоход тусална. Мөн
+улирал бүрийн дүнгийн динамик өөрчлөлтийг судлах нь сонирхолтой байх
+болно.
+
+\textbf{Тайлбарлах боломжтой AI (Explainable AI):} SHAP (SHapley
+Additive exPlanations), LIME зэрэг орчин үеийн тайлбарлах аргуудыг
+ашиглан хар хайрцаг загваруудын шийдвэрийг ойлгомжтой болгох судалгаа
+явуулж болно. Энэ нь багш нар, эцэг эхчүүд загварын үр дүнд илүү итгэх,
+зөв ашиглахад тусална.
+
+\textbf{Интервенцийн судалгаа:} Загварын үр дүнд үндэслэн бодит хөтөлбөр
+хэрэгжүүлж (жишээ нь эрсдэлтэй оюутнуудад нэмэлт дэмжлэг үзүүлэх), энэ
+нь үнэхээр сурлагын үр дүнг сайжруулж байгаа эсэхийг хянах туршилт
+судалгаа хийх хэрэгтэй. Энэ нь загварын практик үр өгөөжийг
+баталгаажуулна.
 
 \section{Багийн гишүүдийн үүрэг
 оролцоо}\label{ux431ux430ux433ux438ux439ux43d-ux433ux438ux448ux4afux4afux434ux438ux439ux43d-ux4afux4afux440ux44dux433-ux43eux440ux43eux43bux446ux43eux43e}
+
+Төслийн ажилд багийн гишүүд дараах байдлаар хувь нэмэр оруулсан:
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule\noalign{}
@@ -834,13 +1565,15 @@ dtype: int64
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-{[}Нэр 1{]} & {[}Үүрэг 1{]} & 25\% \\
-{[}Нэр 2{]} & {[}Үүрэг 2{]} & 30\% \\
-{[}Нэр 3{]} & {[}Үүрэг 3{]} & 25\% \\
-{[}Нэр 4{]} & {[}Үүрэг 4{]} & 20\% \\
+{[}Нэр 1{]} & & \_\_\% \\
+{[}Нэр 2{]} & & \_\_\% \\
+{[}Нэр 3{]} & & \_\_\% \\
+{[}Нэр 4{]} & & \_\_\% \\
+{[}Нэр 5{]} & & \_\_\% \\
 \end{longtable}
 
-\textbf{Тэмдэглэл:} {[}Бүх гишүүд идэвхтэй оролцсон{]}
+\textbf{Тэмдэглэл:} Бүх багийн гишүүд идэвхтэй оролцож, хамтран
+ажилласан.
 
 \section*{Ашигласан
 материал}\label{ux430ux448ux438ux433ux43bux430ux441ux430ux43d-ux43cux430ux442ux435ux440ux438ux430ux43b}
@@ -850,14 +1583,16 @@ dtype: int64
 \begin{CSLReferences}{0}{0}
 \bibitem[\citeproctext]{ref-kaggle2024}
 \CSLLeftMargin{{[}1{]} }%
-\CSLRightInline{Kaggle, {«Student Grade Prediction Dataset»}. 2024.
+\CSLRightInline{Kaggle, {«Student Performance Data Set»}. 2024.
 Available at:
 \url{https://www.kaggle.com/datasets/dipam7/student-grade-prediction}}
 
 \bibitem[\citeproctext]{ref-cortez2008}
 \CSLLeftMargin{{[}2{]} }%
-\CSLRightInline{P. Cortez and A. Silva, {«Using Data Mining to Predict
-Secondary School Student Performance»}, \emph{EUROSIS}, 2008.}
+\CSLRightInline{P. Cortez and A. M. G. Silva, {«Using Data Mining to
+Predict Secondary School Student Performance»}, in \emph{Proceedings of
+5th Annual Future Business Technology Conference}, EUROSIS, 2008, pp
+5--12.}
 
 \end{CSLReferences}
 
