@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1764879410.04884 "c:/Users/Tuguldur/Desktop/tosliin ajil/report.tex" "report.pdf" "report" 1764879410.92229 2
+["pdflatex"] 1764936185.43194 "c:/Users/Tuguldur/Desktop/tosliin ajil/report.tex" "report.pdf" "report" 1764936186.64567 2
   "C:/Users/Tuguldur/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1764866117 13334963 27b6f0a094332badb165b7d74c1baf34 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/fonts/tfm/jknappen/ec/ecrm1000.tfm" 993062122 3148 7e594c8240c71e432203f65ab5f95a51 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/generic/babel/babel.sty" 1762681668 146027 ef4163b2f3d9457f0205f6d7ce8e5cd4 ""
@@ -11,6 +11,8 @@
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/generic/ltxcmds/ltxcmds.sty" 1702206890 17865 1a9bd36b4f98178fa551aca822290953 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/amsfonts.sty" 1358197772 5949 3f3fd50a8cc94c3d4cbf4fc66cd3df1c ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/amssymb.sty" 1358197772 13829 94730e64147574077f8ecfea9bb69af4 ""
+  "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/umsa.fd" 1358197772 961 6518c6525a34feb5e8250ffa91731cff ""
+  "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/amsfonts/umsb.fd" 1358197772 961 d02606146ba5601b5645f987c92e6193 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/amsmath/amsbsy.sty" 1762695272 2222 27db7d52163edae53881b71ff62e754e ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/amsmath/amsgen.sty" 1762695271 4173 1b3e76addfb8afcb47db4811d66e1dc6 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/amsmath/amsmath.sty" 1762695272 88471 b1bb09142edddebd46ba986341b867bd ""
@@ -47,9 +49,12 @@
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/l3kernel/expl3.sty" 1762949142 6558 2d6a01587292e69db3446e139f25ba65 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/l3packages/xparse/xparse.sty" 1761203377 10176 c2fc1c663b3f3899ddac6e6ed3fb1d7e ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/lm/lmodern.sty" 1430474546 1608 b00724785a9e9c599e5181bb8729160b ""
+  "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/lm/omllmm.fd" 1430474546 890 57f5adccd504fb5c98bdf99ed7e7f195 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/microtype/microtype-pdftex.def" 1752015111 49656 229fb67764dc0abf5c6f072ee0d27147 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/microtype/microtype.cfg" 1752015111 27628 65e257a6863987c0e5097054c917d02d ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/microtype/microtype.sty" 1752015111 102775 cc4629d7100508b1ba679322aef9b545 ""
+  "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-msa.cfg" 1752015111 5929 11976688d7d8ed4d0d05efd1b3d5a7e9 ""
+  "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/microtype/mt-msb.cfg" 1752015111 5594 d52d5015abe666fae752ed7674c2dd73 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/parskip/parskip.sty" 1615976160 4288 94714aa7f535440f33181fec52a31963 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/polyglossia/polyglossia.sty" 1758538861 61992 4c35259812f44b1ef5f67fa645b0d35c ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/tools/array.sty" 1761901070 15651 9d7c62df82cb29a555c00550babfe364 ""
@@ -60,11 +65,13 @@
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/svgnam.def" 1729265222 4705 34614fec2d4cfd7794c82198c9076871 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/x11nam.def" 1729265222 9125 edad0294b4f7dd6df8c57b02b40a0855 ""
   "C:/Users/Tuguldur/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "c:/Users/Tuguldur/Desktop/tosliin ajil/report.tex" 1764879408 99934 a0de4c68a3847622f6449e1d60683f7e ""
-  "report.aux" 1764879410 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "report.tex" 1764879408 99934 a0de4c68a3847622f6449e1d60683f7e ""
+  "c:/Users/Tuguldur/Desktop/tosliin ajil/report.tex" 1764936183 104132 ca02409009611502141d896b56b5d89e ""
+  "report.aux" 1764936185 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "report.tex" 1764936183 104132 ca02409009611502141d896b56b5d89e ""
+  "report.toc" 1764936185 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "report.aux"
   "report.log"
   "report.pdf"
+  "report.toc"
   (rewritten before read)
